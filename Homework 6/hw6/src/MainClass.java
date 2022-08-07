@@ -1,0 +1,88 @@
+public class MainClass {
+
+    public static void main(String[] args) {
+
+        Pet pet = new Pet();
+        pet.setNickname("Hedwig");
+        pet.setSpecies(Species.OWL);
+        pet.setAge(5);
+        pet.setTrickLevel1(23);
+        pet.setHabits(new String[]{"fly", "deliver a letter"});
+        pet.eat();
+        pet.respond();
+        pet.foul();
+        System.out.println(pet);
+
+        Human human = new Human();
+        human.setName("Harry");
+        human.setSurname("Potter");
+        human.setYear(1980);
+        human.setSchedule(new String[][]{{DayOfWeek.MONDAY.name(), "Go to Hogwarts"}, {DayOfWeek.TUESDAY.name(), "Go to Azkaban"}});
+        human.setIq(120);
+        Human mother = new Human();
+        mother.setName("Lily");
+        mother.setSurname("Potter");
+        Human father = new Human();
+        father.setName("James");
+        father.setSurname("Potter");
+
+        Family humansFamily = new Family(mother, father);
+        human.setFamily(humansFamily);
+        human.setYear(2022);
+        System.out.println(human);
+
+        Human motherRon = new Human();
+        motherRon.setName("Molly");
+        motherRon.setSurname("Weasley");
+        Human fatherRon = new Human();
+        fatherRon.setName("Arthur");
+        fatherRon.setSurname("Weasley");
+        Human RonGrandmother = new Human();
+        RonGrandmother.setName("Jessica");
+        RonGrandmother.setSurname("Weasley");
+        Human RonGrandFather = new Human();
+        RonGrandFather.setName("James");
+        RonGrandFather.setSurname("Weasley");
+        father.setFamily(new Family(RonGrandmother, RonGrandFather));
+        Family family = new Family(fatherRon, motherRon);
+
+        Human William = new Human();
+        William.setName("William");
+        William.setSurname("Weasley");
+        Human Isabelle = new Human();
+        Isabelle.setName("Isabelle");
+        Isabelle.setSurname("Weasly");
+        Human Charles = new Human();
+        Charles.setName("Charles");
+        Charles.setSurname("Wasley");
+
+        Pet cat = new Pet();
+        cat.setNickname("Crookshanks");
+        cat.setSpecies(Species.CAT);
+        cat.setHabits(new String[]{"sleeping", "sleeping"});
+        cat.setAge(4);
+        cat.setTrickLevel1(90);
+
+        family.addChild(William);
+        family.addChild(Isabelle);
+        family.addChild(Charles);
+        family.setPet(cat);
+        System.out.println(family.deleteChild(2));
+        family.greetPet();
+        System.out.println(family.countFamily());
+        family.describePet();
+        System.out.println(family.feedPet(true));
+        System.out.println(family);
+
+
+//        Create the right amount of loops in the Main class of the Human object so that the garbage collector would start deleting old objects (from 10 thousand untill 10 million, depending on the amount of free ram)
+        int stop = 0;
+        while (true) {
+            stop++;
+            if (stop == 1_00_00) {
+                System.gc();
+                break;
+            }
+        }
+    }
+}
